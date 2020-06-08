@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Display.css";
 
 class Display extends React.Component {
@@ -10,6 +11,11 @@ class Display extends React.Component {
             </div>
         );
     }
+}
+
+Display.propTypes = {
+    value: PropTypes.string.isRequired,
+    formula: PropTypes.string.isRequired
 }
 
 export default Display;

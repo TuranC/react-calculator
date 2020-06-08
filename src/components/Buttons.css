@@ -1,0 +1,39 @@
+button {
+    width: 80px;
+    height: 70px;
+    color: #ffffff;
+    position: relative;
+    border: none;
+    outline: 1px solid #000000;
+    font-size: 1.3rem;
+}
+
+button:hover {
+    color: #000000;
+    outline: 0.5px solid gray;
+    z-index: 3;
+}
+
+.red-color {
+    background-color: rgb(172, 57, 57);
+}
+
+.bg-color-darkgray {
+    background-color: #4d4d4d;
+}
+
+.bg-color-gray {
+    background-color: #666666;
+}
+
+#jumbo {
+    width: 160px;
+}
+
+#equals {
+    width: 80px;
+    height: 140px;
+    position: absolute;
+    bottom: 5px;
+    background-color: #004466;
+}

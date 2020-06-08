@@ -1,0 +1,27 @@
+.display {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.display p {
+    color: #ffffff;
+    font-size: 2rem;
+    margin: auto 0 auto auto;
+}
+
+#value {
+    max-width: 330px;
+}
+
+.invisible {
+    height: 25px;
+    opacity: 0;
+}
+
+#formula {
+    font-size: 1.2rem;
+    color: #ffa500;
+}

@@ -14,51 +14,30 @@ class App extends React.Component {
 
     this.state = {
       value: '0',
-      prevVal: '0',
       formula: '',
       equalClicked: false,
     };
-
-    this.initialize = this.initialize.bind(this);
-    this.handleNumbers = this.handleNumbers.bind(this);
-    this.handleOperators = this.handleOperators.bind(this);
-    this.handleDecimal = this.handleDecimal.bind(this);
-    this.handleEqual = this.handleEqual.bind(this);
-    this.maxDigits = this.maxDigits.bind(this);
   }
 
-  initialize() {
+  initialize = () => {
     this.setState({
       value: '0',
-      prevVal: '0',
       formula: '',
       equalClicked: false,
     });
   }
 
-  maxDigits() {
-    this.setState({
-      value: 'Limit',
-      prevVal: this.state.value,
-    });
-
-    new Promise((resolve) => {
-      setTimeout(() => this.setState({ value: this.state.prevVal }), 1000);
-    });
-  }
-
-  handleNumbers(event) {
+  handleNumbers = (event) => {
     if (!this.state.value.includes('Limit')) {
       const { value, formula, equalClicked } = this.state;
       const newValue = event.target.value;
 
       this.setState({ equalClicked: false });
       if (this.state.value.length > 17) {
-        this.maxDigits();
+        this.setState({ value: 'Limit' });
       } else if (!equalClicked) {
         this.setState({
           value: value === '0' || operators.includes(value) ? newValue : value + newValue,
-          prevVal: value === '0' || operators.includes(value) ? newValue : value + newValue,
         });
         if (newValue === '0' && value === '0') {
           if (formula === '') {
@@ -74,39 +53,35 @@ class App extends React.Component {
       } else {
         this.setState({
           value: event.target.value,
-          prevVal: event.target.value,
           formula: event.target.value,
         });
       }
     }
   }
 
-  handleOperators(event) {
-    if (!this.state.value.includes('Limit')) {
-      const { value, formula, equalClicked } = this.state;
-      const newValue = event.target.value;
-      this.setState({ equalClicked: false });
-
-      if (equalClicked) {
-        this.setState({
-          value: newValue,
-          formula: value + newValue,
-        });
-      } else if (!endsWithOperators.test(formula)) {
-        this.setState({
-          value: newValue,
-          formula: formula + newValue,
-        });
-      } else if (!endsWithNegativeOperator.test(formula)) {
-        this.setState({
-          value: newValue,
-          formula: (endsWithNegativeOperator.test(formula + newValue)) ? formula + newValue : formula,
-        });
-      }
+  handleOperators = (event) => {
+    const { value, formula, equalClicked } = this.state;
+    const newValue = event.target.value;
+    this.setState({ equalClicked: false });
+    if (equalClicked) {
+      this.setState({
+        value: newValue,
+        formula: value + newValue,
+      });
+    } else if (!endsWithOperators.test(formula)) {
+      this.setState({
+        value: newValue,
+        formula: formula + newValue,
+      });
+    } else if (!endsWithNegativeOperator.test(formula)) {
+      this.setState({
+        value: newValue,
+        formula: (endsWithNegativeOperator.test(formula + newValue)) ? formula + newValue : formula,
+      });
     }
   }
 
-  handleDecimal() {
+  handleDecimal = () => {
     if (this.state.equalClicked === true) {
       this.setState({
         value: '0.',
@@ -136,7 +111,7 @@ class App extends React.Component {
     }
   }
 
-  handleEqual() {
+  handleEqual = () => {
     if (!this.state.equalClicked) {
       const result = execute(this.state.formula);
       this.setState({
